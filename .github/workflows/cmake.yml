@@ -29,7 +29,8 @@ jobs:
             libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev \
             libgl1-mesa-dev libglu1-mesa-dev \
             libudev-dev \
-            libfreetype-dev
+            libfreetype-dev \
+            libvorbis-dev
 
       # 3️⃣ Configurer CMake avec out-of-source build
       - name: Configure CMake
