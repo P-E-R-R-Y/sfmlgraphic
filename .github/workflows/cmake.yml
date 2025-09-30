@@ -19,9 +19,6 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y cmake g++
 
-      - name: Setup X virtual framebuffer for trying to display things..
-        run: sudo apt-get install -y xvfb
-
       - name: Install sfml dependencies
         run: |
           sudo apt-get install -y \
@@ -30,6 +27,9 @@ jobs:
             libgl1-mesa-dev libglu1-mesa-dev \
             libudev-dev \ 
             libfreetype6-dev
+
+      - name: Setup X virtual framebuffer for trying to display things..
+        run: sudo apt-get install -y xvfb
 
       # 3️⃣ Configurer CMake avec out-of-source build
       - name: Configure CMake
