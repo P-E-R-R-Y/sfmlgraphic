@@ -13,21 +13,23 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 2️⃣ Installer CMake, compiler, Xvfb, and SFML dependencies
+      # 2️⃣ Installer CMake et compiler
       - name: Install dependencies
         run: |
           sudo apt-get update
+          sudo apt-get install -y cmake g++
+
+      - name: Setup X virtual framebuffer for trying to display things..
+        run: sudo apt-get install -y xvfb
+
+      - name: Install sfml dependencies
+        run: |
           sudo apt-get install -y \
-            cmake g++ \
-            xvfb \
             libx11-dev \
             libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev \
             libgl1-mesa-dev libglu1-mesa-dev \
             libudev-dev \
-            libfreetype6-dev
-
-      - name: Setup X virtual framebuffer for trying to display things..
-        run: sudo apt-get install -y xvfb
+            libfreetype6=2.10.1-2ubuntu0.1 libfreetype-dev libfreetype6-dev
 
       # 3️⃣ Configurer CMake avec out-of-source build
       - name: Configure CMake
