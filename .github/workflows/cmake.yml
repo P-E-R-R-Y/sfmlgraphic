@@ -1,0 +1,39 @@
+name: CMake Build & Test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Checkout du dépôt
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2️⃣ Installer CMake et compiler
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake g++
+
+      # 3️⃣ Configurer CMake avec out-of-source build
+      - name: Configure CMake
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+
+      # 4️⃣ Compiler
+      - name: Build
+        run: cmake --build build
+
+      # 5️⃣ Lancer les tests avec GoogleTest
+      - name: Run tests
+        run:  xvfb-run -a ctest --test-dir build --output-on-failure # ....
+          
+      # 6️⃣ Récupérer l'artifact
+      - name: Upload build folder
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifact
+          path: build/
