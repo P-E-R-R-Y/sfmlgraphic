@@ -109,9 +109,9 @@ TEST_F(SfmllibFixture, IntegrationRun) {
     while (window->isOpen()) {
         while (window->pollEvent()) {
             window->eventClose();
-            if (std::chrono::steady_clock::now() > endTime)
-                window->close();
         }
+        if (std::chrono::steady_clock::now() > endTime)
+                window->close();
 
         window->beginDraw();
         // ... your drawing code ...
