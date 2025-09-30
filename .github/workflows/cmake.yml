@@ -31,6 +31,7 @@ jobs:
             libudev-dev \
             libfreetype-dev \
             libvorbis-dev
+            libflac-dev
 
       # 3️⃣ Configurer CMake avec out-of-source build
       - name: Configure CMake
